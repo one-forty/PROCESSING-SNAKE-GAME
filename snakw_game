@@ -1,0 +1,113 @@
+// IT AIN'T DONE YET
+
+int dir = 1; // udlr
+
+int detectionRange = 5;
+
+int x;
+int y;
+
+int snakeLength = 1;
+
+boolean fruitEaten = true;
+
+float[] squaresX = new float[100];
+float[] squaresY = new float[100];
+
+float fruitX;
+float fruitY;
+
+void setup () {
+  size (600, 600);
+  background (255, 255, 255);
+   x = width/2;
+   y = height/2;
+}
+
+void draw () {
+  background (255, 255, 255);
+  keyPressed ();
+  move ();
+  handleFruit();
+  eatFruit ();
+  rect(x, y, 10,10);
+}
+
+void keyPressed () {
+  if (keyCode == UP) {
+    dir = 1;
+  }
+  if (keyCode == DOWN) {
+    dir = 2;
+  }
+  if (keyCode == LEFT) {
+    dir = 3;
+  }
+  if (keyCode == RIGHT) {
+    dir = 4;
+  }
+  
+  
+}
+
+void handleFruit () {
+    
+ 
+  
+  if (fruitEaten) {
+  
+  fruitX = random(0,width);
+  fruitY =  random(0,height);
+ 
+  fruitEaten =  false;
+ 
+}
+
+  drawFruit(fruitX, fruitY);
+
+}
+
+void eatFruit () {
+  if (x <= fruitX - detectionRange) {
+   fruitEaten = true; 
+  }
+}
+
+
+void drawFruit (float fx, float fy) {
+  color(255, 0, 0);
+  rect(fx, fy, 10,10);
+}
+
+
+void move () {
+ switch (dir) {
+   case 1:
+   y--;
+   if (y < 0) {
+    y = 600; 
+   }
+   break;
+   
+   case 2:
+   y++;
+   if (y > 600) {
+    y = 0; 
+   }
+   break;
+   
+   case 3:
+   x--;
+   if (x < 0) {
+    x = 600; 
+   }
+   break;
+   
+   case 4:
+   x++;
+   if (x > 600) {
+    x = 0; 
+   }
+   break;
+}
+}
